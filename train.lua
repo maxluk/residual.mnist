@@ -48,8 +48,8 @@ function train.accuracy(Xv,Yv,net,batch)
         local Yb = Yv[{{i,j}}]:cuda()
         local out = net:forward(Xb)
         local tmp,YYb = out:max(2)
-        print('Yb.size='.. tostring(Yb:long():size()))
-        lloss = lloss + YYb:eq(Yb:long():cuda()):sum()
+        print('Yb.size='.. tostring(Yb:byte():size()))
+        lloss = lloss + YYb:byte():eq(Yb:byte()):sum()
     end
     return (100*lloss/Nv)
 end
