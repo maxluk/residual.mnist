@@ -26,7 +26,12 @@ function model.residual(N)
     net:add(cls)
     local ct = nn.ClassNLLCriterion()
 
-    require 'cunn';
+    require 'cunn'
+    require 'cudnn'
+    cudnn.fastest = true
+    cudnn.benchmark = true
+    cudnn.convert(net, cudnn)
+    
     net = net:cuda()
     ct = ct:cuda()
 
